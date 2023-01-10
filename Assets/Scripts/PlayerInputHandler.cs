@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Movement))]
 public class PlayerInputHandler : MonoBehaviour
 {
+    public float turnSensitivity;
+
     private Movement _movement;
 
     private void OnValidate()
@@ -22,7 +24,14 @@ public class PlayerInputHandler : MonoBehaviour
     {
         Vector2 movement = value.Get<Vector2>();
         _movement.desiredMovement = movement;
-        //Debug.Log($"Walk{direction}");
+        //Debug.Log($"Walk{movement}");
+    }
+
+    public void OnLook(InputValue value)
+    {
+        Vector2 look = value.Get<Vector2>();
+        _movement.desiredLook = look * turnSensitivity;
+        //Debug.Log($"Look{look}");
     }
 
 }
