@@ -11,6 +11,7 @@ public class Movement : MonoBehaviour
     public Vector2 desiredLook;
 
     private Rigidbody _rigidbody;
+    private float _rotationY;
 
     //También funcionaría con Awake, pero puede hacer que al inicio de la partida se para un momento mientras se configura todo
     void OnValidate()
@@ -22,14 +23,21 @@ public class Movement : MonoBehaviour
     {       
 
        // GIRAMOS en Y según lo que se mueve el RATÓN
+       /*
         //Debug.Log(desiredLook);
         Vector3 angularVelocity = new Vector3(0, desiredLook.x, 0);
         // Cuanto más rápido mueves el ratón, más rápido gira
         _rigidbody.angularVelocity = angularVelocity * rotationSpeed;
         // Normalizado --> Siempre va igual
         //_rigidbody.angularVelocity = angularVelocity.normalized * rotationSpeed;
+       */
+        // GIRAR LA CABEZA  (IZQUIERDA Y DERECHA)
+        _rotationY += desiredLook.x * rotationSpeed * Time.fixedDeltaTime;
 
-       // GIRAR LA CABEZA  (ARRIBA Y ABAJO)        
+        _rigidbody.rotation = Quaternion.Euler(
+            _rigidbody.rotation.eulerAngles.x,
+            _rotationY,
+            _rigidbody.rotation.eulerAngles.z);
 
         // MOVIMIENTO DEL PERSONAJE
         /* Mueve hacia delante, no al forward del objeto

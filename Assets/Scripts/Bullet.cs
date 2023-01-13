@@ -13,8 +13,8 @@ public class Bullet : MonoBehaviour
      * Pero si lo hago en el Start() -> tendremos balas con caida
     */ 
     public void Start()
-    {
-        _rigidbody.velocity = transform.forward * (speed * Time.fixedDeltaTime);
+    {//No hace falta el deltaTime porque solo se usa cuando "se suma"
+        _rigidbody.velocity = transform.forward * speed;
     }
 
 }
