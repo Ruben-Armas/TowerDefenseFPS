@@ -4,15 +4,32 @@ using UnityEngine;
 
 public class TimedSpawner : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    //Lo hacemos con un coolDown para no hacerlo igual que el timeToLive
+    public float coolDownTime;
+    public GameObject prefabToSpawn;
+
+    private float _heat;
+
+    private void Start()
     {
-        
+        _heat = coolDownTime;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        _heat -= Time.deltaTime;
+        if (_heat <= 0)
+        {
+            Spawn(prefabToSpawn);
+            _heat = coolDownTime;
+        }
+    }
+
+    void Spawn(GameObject prefabToSpawn)
+    {
+        Instantiate(
+            prefabToSpawn,
+            transform.position,
+            transform.rotation);
     }
 }
