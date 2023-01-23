@@ -29,7 +29,7 @@ public class PlayerInputHandler : MonoBehaviour
         if (weapon != null)
         {
             weapon.Fire();
-            Debug.Log("PewPew");
+            //Debug.Log("PewPew");
         }
     }
 
